@@ -1,4 +1,3 @@
-# tikape-runko
+# Word Count Service
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
-
+Now just a skeleton for service
