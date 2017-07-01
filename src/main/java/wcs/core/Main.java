@@ -31,14 +31,20 @@ public class Main {
         //Connecting to Redis server on localhost 
         Jedis jedis = new Jedis(redisAddress);
         
-                
+        // Handle request to main page       
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine()); 
+        // Handle request to receiver
+        get("/receiver", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("viesti", "tervehdys");
 
+            return new ModelAndView(map, "receiver");
+        }, new ThymeleafTemplateEngine()); 
 
         
     }
