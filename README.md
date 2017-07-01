@@ -1,3 +1,3 @@
 # Word Count Service
 
-Now just a skeleton for service
+Now just a skeleton for a web service
