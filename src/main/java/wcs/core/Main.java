@@ -9,6 +9,7 @@ import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import redis.clients.jedis.Jedis; 
 
 /**
  *
@@ -20,14 +21,17 @@ public class Main {
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
         }
-        // käytetään oletuksena paikallista sqlite-tietokantaa
-        String jdbcOsoite = "jdbc:sqlite:opiskelijat.db";
-        // jos heroku antaa käyttöömme tietokantaosoitteen, otetaan se käyttöön
-        if (System.getenv("DATABASE_URL") != null) {
-            jdbcOsoite = System.getenv("DATABASE_URL");
+ 
+        // Redis address from Heroku variable if available
+        String redisAddress = "jdbc:sqlite:opiskelijat.db";
+                if (System.getenv("REDIS_URL") != null) {
+            redisAddress = System.getenv("REDIS_URL");
         } 
-
-            
+                
+        //Connecting to Redis server on localhost 
+        Jedis jedis = new Jedis(redisAddress);
+        
+                
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
