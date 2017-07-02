@@ -20,7 +20,8 @@ public class RedisMessage {
         this.jedis = conn;
     } 
     public void saveMessage(String key, String value){
-        jedis.set(key, value);
+        jedis.incr(key);
+         
     }
     public Message getMessage(String key){
         String value = jedis.get(key);
