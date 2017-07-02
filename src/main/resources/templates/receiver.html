@@ -12,7 +12,7 @@
                 <th>Value</th> 
             </tr>
         
-                <th:block th:each="message ${messages}">
+                <th:block th:each="message: ${messages}">
                 <tr>
                     <td th:text="${message.key}">Message"</td>
                     <td th:text="${mesasge.value}">Count"</td>
