@@ -26,7 +26,13 @@ public class RedisMessage {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String time = dateFormat.format(date);
-        jedis.lpush(key, value, time);
+        
+        if(!jedis.exists(key)){
+            jedis.lpush(key, value, time);
+        }else{
+            List<String> valueList = jedis.lrange(key, 0 ,1);
+            jedis.lset(key, 0, valueList.get(0));
+        }
         //jedis.incr(key);
          
     }
@@ -41,8 +47,8 @@ public class RedisMessage {
        // Create a messaage object for all keys
        // and add to a list
        for(String key : keyList){
-           List<String> valueList = jedis.lrange(key, 0 ,2);
-           messageList.add(new Message(key,valueList.get(1),valueList.get(2)));     
+           List<String> valueList = jedis.lrange(key, 0 ,1);
+           messageList.add(new Message(key,valueList.get(0),valueList.get(1)));     
        }
        return messageList;
     } 
