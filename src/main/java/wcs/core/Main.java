@@ -31,6 +31,9 @@ public class Main {
                  
         //Connecting to Redis server
         Jedis jedis = new Jedis(redisAddress);
+        // Delete all records from cache
+        jedis.flushAll();
+        // New redismessage object
         RedisMessage redismessage = new RedisMessage(jedis);
         
         
