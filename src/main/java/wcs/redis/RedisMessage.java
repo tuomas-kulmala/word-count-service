@@ -22,16 +22,17 @@ public class RedisMessage {
     public RedisMessage(Jedis conn) {
         this.jedis = conn;
     } 
-    public void saveMessage(String key, String value){
+    public void saveMessage(String key){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String time = dateFormat.format(date);
         
         if(!jedis.exists(key)){
-            jedis.lpush(key, value, time);
+            jedis.lpush(key, "1");
+            jedis.lpush(key, time);
         }else{
             List<String> valueList = jedis.lrange(key, 0 ,1);
-            jedis.lset(key, 0, valueList.get(0));
+            jedis.lset(key, 0, valueList.get(0)+1);
         }
         //jedis.incr(key);
          
