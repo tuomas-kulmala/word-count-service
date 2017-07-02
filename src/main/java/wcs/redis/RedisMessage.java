@@ -42,7 +42,7 @@ public class RedisMessage {
        // and add to a list
        for(String key : keyList){
            List<String> valueList = jedis.lrange(key, 0 ,2);
-           messageList.add(new Message(key,valueList.get(0),valueList.get(1)));     
+           messageList.add(new Message(key,valueList.get(1),valueList.get(2)));     
        }
        return messageList;
     } 
