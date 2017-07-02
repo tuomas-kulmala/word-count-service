@@ -31,10 +31,8 @@ public class Main {
                  
         //Connecting to Redis server
         Jedis jedis = new Jedis(redisAddress);
-        //RedisMessage redismessage = new RedisMessage(jedis);
+        RedisMessage redismessage = new RedisMessage(jedis);
         
-        // Test the connection
-        jedis.set("testkey", "testvalue");
         
         // Handle request to main page       
         get("/", (req, res) -> {
@@ -54,7 +52,7 @@ public class Main {
         // Handle post messages to receiver
         post("/receiver", (req, res) -> {
             //viestialueDao.lisaa(req.queryParams("nimi"));
-            //redismessage.saveMessage("asdf", "0");
+            redismessage.saveMessage(req.queryParams("nimi"), "0");
             res.redirect("/receiver");
             return "ok";
         });
