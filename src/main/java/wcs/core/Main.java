@@ -45,7 +45,7 @@ public class Main {
         // Handle request to receiver
         get("/receiver", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("messages",redismessage.findAll());
             return new ModelAndView(map, "receiver");
         }, new ThymeleafTemplateEngine()); 
         

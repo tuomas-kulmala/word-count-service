@@ -5,7 +5,21 @@
         <title>Word Count</title>
         <meta charset="utf-8" />
     </head>
-
+        <table style="width:35%">
+            <h1>All messages</h1>
+            <tr>
+                <th>Message</th>
+                <th>Value</th> 
+            </tr>
+        
+                <th:block th:each="message ${messages}">
+                <tr>
+                    <td th:text="${message.key}">Message"</td>
+                    <td th:text="${mesasge.value}">Count"</td>
+                </tr>
+            </th:block>
+                
+           </table>
     <body>
         <h1>Word count service!</h1>
         <form method="POST">
