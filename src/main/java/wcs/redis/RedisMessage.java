@@ -5,6 +5,7 @@
  */
 package wcs.redis;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import redis.clients.jedis.Jedis;
 import wcs.core.Message;
@@ -26,7 +27,7 @@ public class RedisMessage {
         return new Message(key,value);
     }
     public List<Message> findAll(){
-       List<Message> messages = new List<>();
+       List<Message> messages = new ArrayList<>();
        // Find all keys
        Set<String> list = jedis.keys("*");
        // Create a messaage object for all keys
