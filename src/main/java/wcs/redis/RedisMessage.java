@@ -32,7 +32,7 @@ public class RedisMessage {
             jedis.lpush(key, time);
         }else{
             List<String> valueList = jedis.lrange(key, 0 ,1);
-            jedis.lset(key, 0, valueList.get(0)+1);
+            jedis.lset(key, 1, valueList.get(1)+1);
         }
         //jedis.incr(key);
          
@@ -49,7 +49,7 @@ public class RedisMessage {
        // and add to a list
        for(String key : keyList){
            List<String> valueList = jedis.lrange(key, 0 ,1);
-           messageList.add(new Message(key,valueList.get(0),valueList.get(1)));     
+           messageList.add(new Message(key,valueList.get(1),valueList.get(0)));     
        }
        return messageList;
     } 
