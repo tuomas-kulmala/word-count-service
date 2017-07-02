@@ -52,7 +52,7 @@ public class Main {
         // Handle post messages to receiver
         post("/receiver", (req, res) -> {
             //viestialueDao.lisaa(req.queryParams("nimi"));
-            redismessage.saveMessage(req.params(":message"), "0");
+            redismessage.saveMessage("asdf", "0");
             res.redirect("/receiver");
             return "ok";
         });
