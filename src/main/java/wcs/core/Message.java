@@ -12,15 +12,21 @@ package wcs.core;
 public class Message {
     private String key;
     private String value;
+    private String time;
     
-    public Message(String key, String value){
+    public Message(String key, String value, String time){
         this.key = key;
         this.value = value;
+        this.time = time;
+        
     }
     public String getKey(){
         return this.key;
     }
     public String getValue(){
         return this.value;
+    }
+    public String getTime(){
+        return this.time;
     }
 }

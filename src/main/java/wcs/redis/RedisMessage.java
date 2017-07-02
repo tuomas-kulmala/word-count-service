@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package wcs.redis;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
@@ -20,22 +23,27 @@ public class RedisMessage {
         this.jedis = conn;
     } 
     public void saveMessage(String key, String value){
-        jedis.incr(key);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String time = dateFormat.format(date);
+        jedis.lpush(key, value, time);
+        //jedis.incr(key);
          
     }
     public Message getMessage(String key){
         String value = jedis.get(key);
-        return new Message(key,value);
+        return new Message(key,value,"time");
     }
     public List<Message> findAll(){
-       List<Message> messages = new ArrayList<>();
+       List<Message> messageList = new ArrayList<>();
        // Find all keys
-       Set<String> list = jedis.keys("*");
+       Set<String> keyList = jedis.keys("*");
        // Create a messaage object for all keys
        // and add to a list
-       for(String k : list){
-           messages.add(new Message(k,jedis.get(k)));
+       for(String key : keyList){
+           List<String> valueList = jedis.lrange(key, 0 ,2);
+           messageList.add(new Message(key,valueList.get(0),valueList.get(1)));     
        }
-       return messages;
+       return messageList;
     } 
 }
