@@ -31,9 +31,9 @@ public class RedisMessage {
             jedis.lpush(key, "1");
             jedis.lpush(key, time);
         }else{
-            List<String> valueList = jedis.lrange(key, 0 ,1);
-            //jedis.lset(key, 1, valueList.get(1)+1);        
+            List<String> valueList = jedis.lrange(key, 0 ,1);     
             jedis.lset(key, 1, Integer.parseInt(valueList.get(1))+1+"");
+            jedis.lset(key, 0, time);
         }
         //jedis.incr(key);
         
