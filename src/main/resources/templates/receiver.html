@@ -4,18 +4,29 @@
     <head>
         <title>Word Count</title>
         <meta charset="utf-8" />
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
-        <table style="width:35%">
+        
             <h1>All messages</h1>
+            <table style="width:35%">
             <tr>
                 <th>Message</th>
                 <th>Value</th> 
+                <th>Time</th> 
             </tr>
         
                 <th:block th:each="message: ${messages}">
                 <tr>
                     <td th:text="${message.key}">Message"</td>
                     <td th:text="${message.value}">Count"</td>
+                    <td th:text="${message.time}">Time"</td>
                 </tr>
             </th:block>
                 
