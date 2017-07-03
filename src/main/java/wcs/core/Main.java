@@ -54,8 +54,9 @@ public class Main {
         
         // Handle post messages to receiver
         post("/receiver", (req, res) -> {
-            //viestialueDao.lisaa(req.queryParams("nimi"));
-            redismessage.saveMessage(req.queryParams("message"));
+            if(!req.queryParams("message").isEmpty()){
+                redismessage.saveMessage(req.queryParams("message"));
+            }
             res.redirect("/receiver");
             return "ok";
         });
