@@ -29,7 +29,7 @@ public class RedisMessage {
         
         if(!jedis.exists(key)){
             jedis.lpush(key, "1");
-            jedis.lpush(key, time);
+            jedis.lpush(key, "time");
         }else{
             List<String> valueList = jedis.lrange(key, 0 ,1);   
             //jedis.lset(key, 0, time);

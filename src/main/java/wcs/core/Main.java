@@ -24,7 +24,7 @@ public class Main {
         }
  
         // Redis address from Heroku variable if available
-        String redisAddress = "192.168.137.9";
+        String redisAddress = "localhost";
         if (System.getenv("REDIS_URL") != null) {
             redisAddress = System.getenv("REDIS_URL");
         } 
